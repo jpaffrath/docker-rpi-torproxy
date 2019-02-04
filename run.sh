@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Start the first process
+# Start tor process
 service tor start
 status=$?
 if [ $status -ne 0 ]; then
@@ -8,20 +8,15 @@ if [ $status -ne 0 ]; then
   exit $status
 fi
 
-# Start the second process
+# Start polipo process
 service polipo start
 status=$?
 if [ $status -ne 0 ]; then
-  echo "Failed to start ppolipo: $status"
+  echo "Failed to start polipo: $status"
   exit $status
 fi
 
-# Naive check runs checks once a minute to see if either of the processes exited.
-# This illustrates part of the heavy lifting you need to do if you want to run
-# more than one service in a container. The container exits with an error
-# if it detects that either of the processes has exited.
-# Otherwise it loops forever, waking up every 60 seconds
-
+# Check if processes are still running
 while sleep 60; do
   ps aux |grep tor |grep -q -v grep
   PROCESS_1_STATUS=$?
@@ -34,4 +29,3 @@ while sleep 60; do
     exit 1
   fi
 done
-

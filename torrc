@@ -1,1 +1,3 @@
 SOCKSPort 9050 # Default: Bind to localhost:9050 for local connections.
+
+ExitPolicy reject *:* # no exits allowed

@@ -1,4 +1,4 @@
-## Raspberry Pi Tor Proxy
+## :whale: Raspberry Pi Tor Proxy
 A lightweight Docker image designed to run from a Raspberry Pi as a Tor Proxy for your local network.
 
 ### Configuration
